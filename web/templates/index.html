@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% include '_slider.html' with object_list=object_list %}
+    <div class="row">
+        <div class="col-sm-6">
+            {% include '_slider.html' with object_list=object_list %}
+        </div>
+    </div>
 {% endblock %}
