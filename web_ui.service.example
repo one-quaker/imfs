@@ -1,0 +1,16 @@
+#/etc/systemd/system/web_ui.service
+
+[Unit]
+Description=WebUIService
+After=network.target
+
+[Service]
+Restart=always
+User=pi
+Group=pi
+
+WorkingDirectory=/home/pi/imfs
+ExecStart=/home/pi/.virtualenvs/photo_frame/bin/gunicorn photo_frame.wsgi:application -w 2 -b :8000 --reload --log-level=debug --log-file=-
+
+[Install]
+WantedBy=multi-user.target
