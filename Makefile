@@ -24,3 +24,9 @@ collectstatic:
 
 create_admin:
 	echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'pass')" | $(RUN) shell
+
+pip_req:
+	pip install -r requirements.txt
+
+module_update:
+	wget -c https://raw.githubusercontent.com/VyacheslavKorotach/Immutable_File_System/master/eos_imfs.py -O imfs_io/eos_imfs.py
