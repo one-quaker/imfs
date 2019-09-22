@@ -31,7 +31,7 @@ class Photo(CreatedMixin):
     @property
     def thumbnail(self):
         if self.file:
-            return get_thumbnail(self.file, '320x200', crop='center', quality=55)
+            return get_thumbnail(self.file, '300x220', crop='center', quality=55)
         return None
 
 
