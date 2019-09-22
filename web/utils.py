@@ -17,3 +17,28 @@ def path_and_rename(instance, file_obj):
     else:
         file_obj = '{}.{}'.format(random_fn, fext)
     return os.path.join(upload_to, file_obj)
+
+
+def rm_dir(dp):
+    import os
+    import shutil
+
+    if os.path.isdir(dp):
+        print(f'Removing directory "{dp}"')
+        shutil.rmtree(dp)
+
+
+def mk_dir(dp):
+    import os
+
+    if not os.path.isdir(dp):
+        print(f'Creating directory "{dp}"')
+        os.mkdir(dp)
+
+
+def rm_file(fp):
+    import os
+
+    if os.path.isfile(fp):
+        print(f'Removing file "{fp}"')
+        os.remove(fp)

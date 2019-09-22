@@ -3,13 +3,13 @@
         <a href="{% url 'index-page' %}">Home</a>
     </div>
     <div class="menu-item col-sm-2">
-        <a href="{% url 'update-user-data' %}">Update</a>
-    </div>
-    <div class="menu-item col-sm-2">
         <a href="{% url 'add-photo' %}">Add photo</a>
     </div>
     <div class="menu-item col-sm-2">
         <a href="{% url 'set-wallet' %}">Setup wallet</a>
+    </div>
+    <div class="menu-item col-sm-2">
+        <a href="{% url 'update-user-data' %}">Update</a>
     </div>
     <div class="menu-item col-sm-2">Wallet: <strong>{{ wallet.address }}</strong></div>
     <div class="menu-item col-sm-2">IP: <a href="{{ main_url }}">{{ ip }}</a></div>

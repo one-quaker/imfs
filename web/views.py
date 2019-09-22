@@ -1,13 +1,16 @@
+import os
+import shutil
 from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.conf import settings
 from django.http import HttpResponseRedirect
-import os
+from sorl.thumbnail import get_thumbnail
 
 
 from .models import Photo, Wallet, WalletConfig
+from .utils import random_string, path_and_rename, rm_file, rm_dir, mk_dir
 
 
 class IndexView(generic.ListView):
@@ -32,6 +35,8 @@ class UpdateUserDataView(generic.base.RedirectView):
     def get_user_data(self):
         from imfs_io.eos_imfs import EosFile, EosDir
 
+        self.remove_local_data()
+
         user_wallet = Wallet.objects.first()
         wallet_config = WalletConfig.objects.first()
 
@@ -48,10 +53,15 @@ class UpdateUserDataView(generic.base.RedirectView):
         print(allowed_file_list)
         self.save_user_data(allowed_file_list)
 
+    def remove_local_data(self):
+        Photo.objects.all().delete()
+        rm_dir(settings.USER_TMP_ROOT)
+        mk_dir(settings.USER_TMP_ROOT)
+
     def save_user_data(self, data):
         if not data:
             return
-        Photo.objects.all().delete()
+
         for fp in data:
             photo = Photo(file=fp)
             photo.save()
@@ -65,7 +75,32 @@ class AddPhotoView(generic.edit.CreateView):
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.save()
+        self.save_user_file(obj.file.path)
         return HttpResponseRedirect(reverse('add-photo'))
+
+    def save_user_file(self, fp):
+        from imfs_io.eos_imfs import EosFile, EosDir
+
+        fext = fp.split('.')[-1]
+        fname = '{}.{}'.format(random_string(), fext)
+
+        user_wallet = Wallet.objects.first()
+        wallet_config = WalletConfig.objects.first()
+
+        tmp_fp = os.path.join(settings.USER_TMP_ROOT, fname)
+        resized_im = get_thumbnail(fp, '300x200', crop='center', quality=50)
+
+        with open(tmp_fp, 'wb') as f:
+            f.write(resized_im.read())
+
+        file_1 = EosFile(user_wallet.address, settings.USER_TMP_ROOT, fname, wallet_config.address, wallet_config.private_key)
+
+        try:
+            file_1.put_file()
+        except Exception as e:
+            print(e)
+
+        rm_file(tmp_fp)
 
 
 class SetWalletView(generic.edit.CreateView):
@@ -76,4 +111,4 @@ class SetWalletView(generic.edit.CreateView):
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.save()
-        return HttpResponseRedirect(reverse('set-wallet'))
+        return HttpResponseRedirect(reverse('update-user-data'))

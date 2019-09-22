@@ -8,5 +8,5 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index-page'),
     path('add', views.AddPhotoView.as_view(), name='add-photo'),
     path('set', views.SetWalletView.as_view(), name='set-wallet'),
-    path('update', views.UpdateUserDataView.as_view(), name='update-user-data'),
+    path('update-data', views.UpdateUserDataView.as_view(), name='update-user-data'),
 ]
