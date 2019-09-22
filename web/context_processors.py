@@ -14,7 +14,6 @@ def get_ip():
         ip = out.strip().split(' ')[1]
     except:
         ip = 'unknown'
-    print(sys.platform)
     return ip
 
 

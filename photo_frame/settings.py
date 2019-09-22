@@ -128,3 +128,8 @@ STATIC_ROOT = os.path.join(PUBLIC_DIR, 'static')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(PUBLIC_DIR, 'media')
 MEDIA_URL = '/media/'
+
+USER_TMP_NAME = 'user_tmp'
+USER_TMP_ROOT = os.path.join(MEDIA_ROOT, USER_TMP_NAME)
+for dir_name in (USER_TMP_ROOT, ):
+    if not os.path.isdir(dir_name): os.mkdir(dir_name)

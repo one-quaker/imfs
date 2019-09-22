@@ -52,12 +52,12 @@ class WalletConfig(CreatedMixin):
         return self.address
 
 
-@receiver(post_save, sender=Photo)
-def process_photo(sender, instance, *args, **kwargs):
-    import os
-    cmd = 'cp -fv {fp} {root}/tmp/{fn}'.format(fp=instance.file.path, root=settings.BASE_DIR, fn=instance.file_name)
-    print(cmd)
-    os.system(cmd)
+# @receiver(post_save, sender=Photo)
+# def process_photo(sender, instance, *args, **kwargs):
+    # import os
+    # cmd = 'cp -fv {fp} {root}/tmp/{fn}'.format(fp=instance.file.path, root=settings.BASE_DIR, fn=instance.file_name)
+    # print(cmd)
+    # os.system(cmd)
 
 
 @receiver(pre_save, sender=Wallet)

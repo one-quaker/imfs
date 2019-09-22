@@ -29,4 +29,4 @@ pip_req:
 	pip install -r requirements.txt
 
 module_update:
-	wget -c https://raw.githubusercontent.com/VyacheslavKorotach/Immutable_File_System/master/eos_imfs.py -O imfs_io/eos_imfs.py
+	wget https://raw.githubusercontent.com/VyacheslavKorotach/Immutable_File_System/master/eos_imfs.py -O imfs_io/eos_imfs.py
