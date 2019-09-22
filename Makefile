@@ -30,3 +30,6 @@ pip_req:
 
 module_update:
 	wget https://raw.githubusercontent.com/VyacheslavKorotach/Immutable_File_System/master/eos_imfs.py -O imfs_io/eos_imfs.py
+
+service_restart:
+	sudo systemctl restart web_ui && sudo systemctl restart lightdm
