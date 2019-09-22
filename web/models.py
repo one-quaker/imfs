@@ -5,6 +5,8 @@ from django.dispatch import receiver
 from sorl.thumbnail import get_thumbnail
 import os
 
+from .utils import random_string, path_and_rename
+
 
 class CreatedMixin(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -18,7 +20,7 @@ class CreatedMixin(models.Model):
 
 
 class Photo(CreatedMixin):
-    file = models.ImageField(upload_to='photo', max_length=255)
+    file = models.ImageField(upload_to=path_and_rename, max_length=255)
     dir = models.CharField(max_length=64, default='main')
 
     def __str__(self):
@@ -31,7 +33,7 @@ class Photo(CreatedMixin):
     @property
     def thumbnail(self):
         if self.file:
-            return get_thumbnail(self.file, '300x220', crop='center', quality=55)
+            return get_thumbnail(self.file, '300x220', crop='center', quality=50)
         return None
 
 

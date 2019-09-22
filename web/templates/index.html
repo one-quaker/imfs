@@ -2,8 +2,23 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-6">
-            {% include '_slider.html' with object_list=object_list %}
-        </div>
+        {% include '_fancy_slider.html' with object_list=object_list %}
     </div>
+{% endblock %}
+
+
+{% block js_extra %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            let options = {
+                slideShow: {
+                    autoStart: true,
+                },
+                loop: true,
+            };
+
+            $('.fancy-slider').fancybox(options);
+            $.fancybox.open($('.fancy-slider').get(), options);
+        });
+    </script>
 {% endblock %}

@@ -27,7 +27,7 @@ class AddPhotoView(generic.edit.CreateView):
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.save()
-        return HttpResponseRedirect(reverse('index-page'))
+        return HttpResponseRedirect(reverse('add-photo'))
 
 
 class SetWalletView(generic.edit.CreateView):

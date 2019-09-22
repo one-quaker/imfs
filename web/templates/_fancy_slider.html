@@ -1,0 +1,7 @@
+{% for i in object_list %}
+    <div class="col-sm-3">
+        <a class="fancy-slider" href="{{ i.thumbnail.url }}" data-fancybox="gallery" data-caption="{{ i.file_name }}" data-width="1000">
+            <img src="{{ i.thumbnail.url }}" alt="{{ i.file_name }}" />
+        </a>
+    </div>
+{% endfor %}
