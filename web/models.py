@@ -44,6 +44,14 @@ class Wallet(CreatedMixin):
         return self.address
 
 
+class WalletConfig(CreatedMixin):
+    private_key = models.CharField(max_length=1024)
+    address = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.address
+
+
 @receiver(post_save, sender=Photo)
 def process_photo(sender, instance, *args, **kwargs):
     import os

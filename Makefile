@@ -1,6 +1,6 @@
 RUN=python manage.py
 
-run:
+run: collectstatic
 	$(RUN) runserver 0.0.0.0:8000
 
 clean:

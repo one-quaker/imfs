@@ -1,4 +1,4 @@
-def random_string(size=6):
+def random_string(size=5):
     import string
     import random
 
@@ -10,8 +10,8 @@ def path_and_rename(instance, file_obj):
     import os
 
     upload_to = 'photo'
-    fext = file_obj.split('.')[-1]
-    random_fn = random_string(4)
+    fext = file_obj.split('.')[-1].lower()
+    random_fn = random_string()
     if instance.pk:
         file_obj = '{}.{}'.format(instance.pk, fext)
     else:
