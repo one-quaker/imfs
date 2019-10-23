@@ -6,6 +6,6 @@ gunicorn==19.9.0
 django-extensions==2.1.6
 psycopg2-binary==2.7.7
 Markdown==3.1
-Pillow==6.1.0
+Pillow==6.2.0
 sorl-thumbnail==12.5.0
 libeospy==2.0.1
