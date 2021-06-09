@@ -1,4 +1,4 @@
-Django==2.2.5
+Django==2.2.22
 requests==2.21.0
 django-debug-toolbar==1.11
 ipdb==0.12.2
